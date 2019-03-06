@@ -49,4 +49,4 @@ if __name__ == '__main__':
         newsound += chunks[i]
 
     # simple export
-    output_file = newsound.export("OUT-{}ms-chunks-{}".format(chunk_size, args.wavfile), format="wav")
+    output_file = newsound.export("{}ms-scramble-{}".format(chunk_size, args.wavfile), format="wav")
