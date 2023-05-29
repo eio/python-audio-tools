@@ -2,18 +2,20 @@ import random
 import argparse
 from pydub import AudioSegment
 
-if __name__ == '__main__':
-    print
+if __name__ == "__main__":
+    print("Scrambling...")
     parser = argparse.ArgumentParser()
-    parser.add_argument('wavfile', help='Filepath to WAV file')
-    parser.add_argument('--chunk-size', help='Size of chunk in milliseconds', default=80)
+    parser.add_argument("wavfile", help="Filepath to WAV file")
+    parser.add_argument(
+        "--chunk-size", help="Size of chunk in milliseconds", default=80
+    )
     args = parser.parse_args()
 
     chunk_size = int(args.chunk_size)
     sound = AudioSegment.from_wav(args.wavfile)
 
     # number of chunks in audio file
-    num_chunks = int(len(sound)/chunk_size)
+    num_chunks = int(len(sound) / chunk_size)
 
     # split up audio into chunks
     # and assign each chunk a number
@@ -49,4 +51,6 @@ if __name__ == '__main__':
         newsound += chunks[i]
 
     # simple export
-    output_file = newsound.export("{}ms-scramble-{}".format(chunk_size, args.wavfile), format="wav")
+    outname = "{}ms-scramble-{}".format(chunk_size, args.wavfile)
+    output_file = newsound.export(outname, format="wav")
+    print("Output to: `{}`".format(outname))
